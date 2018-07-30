@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @tour_package.user %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @tour_package.name %>
+</p>
+
+<p>
+  <strong>Age from:</strong>
+  <%= @tour_package.age_from %>
+</p>
+
+<p>
+  <strong>Age upto:</strong>
+  <%= @tour_package.age_upto %>
+</p>
+
+<p>
+  <strong>Max people:</strong>
+  <%= @tour_package.max_people %>
+</p>
+
+<p>
+  <strong>Cost per person:</strong>
+  <%= @tour_package.cost_per_person %>
+</p>
+
+<p>
+  <strong>Last submission date:</strong>
+  <%= @tour_package.last_submission_date %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @tour_package.active %>
+</p>
+
+<%= link_to 'Edit', edit_tour_package_path(@tour_package) %> |
+<%= link_to 'Back', tour_packages_path %>
