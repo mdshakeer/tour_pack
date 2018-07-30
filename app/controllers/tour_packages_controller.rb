@@ -4,7 +4,7 @@ class TourPackagesController < ApplicationController
   # GET /tour_packages
   # GET /tour_packages.json
   def index
-    @tour_packages = TourPackage.all
+    @tour_packages = TourPackage.active.paginate(:page => params[:page])
   end
 
   # GET /tour_packages/1

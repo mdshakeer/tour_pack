@@ -8,7 +8,7 @@ class CreateTourPackages < ActiveRecord::Migration[5.1]
       t.integer :max_people
       t.float :cost_per_person
       t.date :last_submission_date
-      t.boolean :active
+      t.boolean :active, :default => true
 
       t.timestamps
     end

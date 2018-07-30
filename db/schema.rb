@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20180729173935) do
     t.integer "max_people"
     t.float "cost_per_person"
     t.date "last_submission_date"
-    t.boolean "active"
+    t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_tour_packages_on_user_id"
