@@ -1,53 +1,74 @@
 <%= form_with(model: tour_package, local: true) do |form| %>
-  <% if tour_package.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(tour_package.errors.count, "error") %> prohibited this tour_package from being saved:</h2>
+  <div class="step_1">
+    <% if tour_package.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(tour_package.errors.count, "error") %> prohibited this tour_package from being saved:</h2>
 
-      <ul>
-      <% tour_package.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% tour_package.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <%= form.label :pack_name %>
+      <%= form.text_field :name, id: :tour_package_name, :class => "form-control" %>
     </div>
-  <% end %>
 
-  <div class="form-group">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :tour_package_user_id, :class => "form-control" %>
+    <div class="form-group">
+      <%= form.label :age_from %>
+      <%= form.number_field :age_from, id: :tour_package_age_from, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :age_upto %>
+      <%= form.number_field :age_upto, id: :tour_package_age_upto, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :max_people %>
+      <%= form.number_field :max_people, id: :tour_package_max_people, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :cost_per_person %>
+      <%= form.text_field :cost_per_person, id: :tour_package_cost_per_person, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :last_submission_date %>
+      <%= form.date_select :last_submission_date, id: :tour_package_last_submission_date, :class => "form-control" %>
+    </div>
+    <button class="btn btn-default t_next">Save & Continue</button>
   </div>
-
-  <div class="form-group">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :tour_package_name, :class => "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :age_from %>
-    <%= form.number_field :age_from, id: :tour_package_age_from, :class => "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :age_upto %>
-    <%= form.number_field :age_upto, id: :tour_package_age_upto, :class => "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :max_people %>
-    <%= form.number_field :max_people, id: :tour_package_max_people, :class => "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :cost_per_person %>
-    <%= form.text_field :cost_per_person, id: :tour_package_cost_per_person, :class => "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :last_submission_date %>
-    <%= form.date_select :last_submission_date, id: :tour_package_last_submission_date, :class => "form-control" %>
-  </div>
-
-  <div class="form-group text-center">
-    <%= form.submit "SAVE",:class => "btn btn-primary" %>
-    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  <div class="step_2 hidden">
+    <div class="dest_list">
+      <% tour_package.destinations.each do |destination| %>
+        <%= render :partial => "destinations/form", :locals => {:destination => destination} %>
+      <% end %>
+    </div>
+    <div class="form-group text-center">
+      <%= link_to "Add Destination", new_destination_path, :remote => true, :class => "btn btn-success" %>
+    </div>
+    <div class="form-group text-center">
+      <%= form.submit "SAVE",:class => "btn btn-primary" %>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
   </div>
 <% end %>
+<script type="text/javascript">
+  $(".t_next").click(function(){
+    c = 0;
+    $(".step_1 input").each(function(){
+      if ($(this).val() == "") {
+        c+=1;
+      }
+    });
+    if (c == 0) {
+      $(".step_1").addClass("hidden");
+      $(".step_2").removeClass("hidden");
+    }
+    return false;
+  })
+</script>

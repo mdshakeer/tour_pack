@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tour_package: one
+  point: MyString
+  date: 2018-07-31
+
+two:
+  tour_package: two
+  point: MyString
+  date: 2018-07-31

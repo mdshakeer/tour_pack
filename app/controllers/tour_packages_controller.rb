@@ -27,7 +27,7 @@ class TourPackagesController < ApplicationController
   # POST /tour_packages
   # POST /tour_packages.json
   def create
-    @tour_package = TourPackage.new(tour_package_params)
+    @tour_package = current_user.tour_packages.new(tour_package_params)
 
     respond_to do |format|
       if @tour_package.save
@@ -72,6 +72,6 @@ class TourPackagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tour_package_params
-      params.require(:tour_package).permit(:user_id, :name, :age_from, :age_upto, :max_people, :cost_per_person, :last_submission_date, :active)
+      params.require(:tour_package).permit(:name, :age_from, :age_upto, :max_people, :cost_per_person, :last_submission_date, :active)
     end
 end

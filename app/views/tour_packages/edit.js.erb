@@ -1,0 +1,2 @@
+$("#tourPack .modal-body").html("<%= escape_javascript(render(:partial => 'form', :locals => {:tour_package => @tour_package})) %>")
+$("#tourPack").modal('show');
