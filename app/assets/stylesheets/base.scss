@@ -31,14 +31,17 @@ body{
 	display: -webkit-flex;
 	display: flex;
 	-webkit-flex-flow: row wrap;
+	/*justify-content: center;*/
 	.tourPack{
 		min-height: 200px;
-		box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+		box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
 		padding: 5px;
-		width: 33%;
+		width: 30%;
 		margin-top: 10px;
+		margin-right: 10px;
 		color: #444;
-		border: 1px solid #aaa;
+		background-color: #fff;
+		border: 1px solid #ccc;
 		.title{
 
 		}

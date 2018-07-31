@@ -1,9 +1,10 @@
-
+<div class="form-inline mb-10">
 	<div class="form-group">
-        <%= label_tag :point %>
-        <%= select_tag "point[]",options_for_select(["Start","Intermediate","End"]), {:class => "form-control"} %>
-      </div>
-      <div class="form-group">
-        <%= label_tag :date %>
-        <%= date_select "date[]", id: :destination_date, :class => "form-control" %>
-      </div>
+	    <%= label_tag :point %>
+	    <%= select_tag "point[]",options_for_select(["Start","Intermediate","End"],:selected => destination.point), {:class => "form-control"} %>
+	</div>
+	<div class="form-group">
+		<%= label_tag :date %>
+		<%= date_field_tag "date[]", destination.date, :class => "form-control" %>
+	</div>
+</div>

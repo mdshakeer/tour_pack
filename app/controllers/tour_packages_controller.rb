@@ -31,6 +31,12 @@ class TourPackagesController < ApplicationController
 
     respond_to do |format|
       if @tour_package.save
+        if params[:point] and params[:point].any?
+          params[:point].each_with_index do |point,i|
+            @tour_package.destinations.create(point:point,date:params[:date][i])
+          end
+        end
+        @tour_package.destinations.create()
         format.html { redirect_to @tour_package, notice: 'Tour package was successfully created.' }
         format.json { render :show, status: :created, location: @tour_package }
       else

@@ -20,11 +20,11 @@
           </div>
         <% end %>
         <div class="title text-center h4"><%= tour_package.name.capitalize %></div>
-        <div><%= tour_package.age_from %></div>
-        <div><%= tour_package.age_upto %></div>
-        <div><%= tour_package.max_people %></div>
-        <div><%= tour_package.cost_per_person %></div>
-        <div><%= tour_package.last_submission_date %></div>
+        <div><label>Places cover:</label> <%= tour_package.destinations.count %></div>
+        <div><label>Age Range:</label> <%= "#{tour_package.age_from} - #{tour_package.age_upto}" %></div>
+        <div><label>People Limit:</label> <%= tour_package.max_people %></div>
+        <div><label>Cost Per Person:</label> Rs.<%= tour_package.cost_per_person.round %></div>
+        <div><label>Last Submission Date:</label> <%= tour_package.last_submission_date.strftime("%d %b, %Y") %></div>
         <div class="text-center"><%= link_to 'View Plan', tour_package, :class => "btn btn-success" %></div>
       </div>
     <% end %>
