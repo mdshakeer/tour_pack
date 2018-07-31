@@ -35,6 +35,10 @@ body{
 	/*justify-content: center;*/
 	.searchBox{
 		width: 100%;
+		select{
+			width: 20%;
+			display: inline-block;
+		}
 	}
 	.tourPack{
 		min-height: 200px;

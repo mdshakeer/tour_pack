@@ -1,6 +1,6 @@
 class DestinationsController < ApplicationController
 	def new
-		@destination = TourPackage.new
+		@destination = Destination.new
 	    respond_to do |format|
 	      format.js
 	    end

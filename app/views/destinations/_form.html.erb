@@ -1,5 +1,9 @@
 <div class="form-inline mb-10">
 	<div class="form-group">
+	    <%= label_tag :name %>
+	    <%= text_field_tag "name[]",destination.name, {:class => "form-control"} %>
+	</div>
+	<div class="form-group">
 	    <%= label_tag :point %>
 	    <%= select_tag "point[]",options_for_select(["Start","Intermediate","End"],:selected => destination.point), {:class => "form-control"} %>
 	</div>

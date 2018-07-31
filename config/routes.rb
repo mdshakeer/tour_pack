@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   resources :tour_packages do
   	collection do
-  		post "search"
+  		get "search"
+  		get "filter"
   	end
   end
   resources :destinations

@@ -1,6 +1,7 @@
 class TourPackagesController < ApplicationController
   before_action :set_tour_package, only: [:show, :edit, :update, :destroy]
-  before_action :find_page, :only => [:search]
+  before_action :find_page, :only => [:search,:filter]
+  before_action :collect_destinations, :only => [:index,:filter]
 
   # GET /tour_packages
   # GET /tour_packages.json
@@ -10,6 +11,11 @@ class TourPackagesController < ApplicationController
 
   def search
     @tour_packages = TourPackage.search_tour_pack(params[:q],params[:page])
+    render "index"
+  end
+
+  def filter
+    @tour_packages = TourPackage.filter_tour_pack(params[:source],params[:destination],params[:date],params[:page])
     render "index"
   end
 
@@ -37,12 +43,11 @@ class TourPackagesController < ApplicationController
 
     respond_to do |format|
       if @tour_package.save
-        if params[:point] and params[:point].any?
-          params[:point].each_with_index do |point,i|
-            @tour_package.destinations.create(point:point,date:params[:date][i])
+        if params[:name] and params[:name].any?
+          params[:name].each_with_index do |name,i|
+            @tour_package.destinations.create(name:name,point:params[:point][i],date:params[:date][i])
           end
         end
-        @tour_package.destinations.create()
         format.html { redirect_to @tour_package, notice: 'Tour package was successfully created.' }
         format.json { render :show, status: :created, location: @tour_package }
       else
@@ -57,6 +62,12 @@ class TourPackagesController < ApplicationController
   def update
     respond_to do |format|
       if @tour_package.update(tour_package_params)
+        if params[:name] and params[:name].any?
+          @tour_package.destinations.delete_all
+          params[:name].each_with_index do |name,i|
+            @tour_package.destinations.create(name:name,point:params[:point][i],date:params[:date][i])
+          end
+        end
         format.html { redirect_to @tour_package, notice: 'Tour package was successfully updated.' }
         format.json { render :show, status: :ok, location: @tour_package }
       else
@@ -85,5 +96,11 @@ class TourPackagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def tour_package_params
       params.require(:tour_package).permit(:name, :age_from, :age_upto, :max_people, :cost_per_person, :last_submission_date, :active)
+    end
+
+    def collect_destinations
+      @start_points = Destination.where(point:"Start").collect(&:name).uniq
+      @end_points = Destination.where(point:"End").collect(&:name).uniq
+      @start_dates = Destination.where(point:"Start").collect(&:date).uniq
     end
 end
