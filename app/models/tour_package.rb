@@ -3,4 +3,14 @@ class TourPackage < ApplicationRecord
   has_many :destinations
 
   scope :active, -> { where(active: true) }
+
+  searchkick
+
+  def search_data
+  	{
+  		name: name
+  	}
+  end
+
+  include Searchable
 end

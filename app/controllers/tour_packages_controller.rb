@@ -1,10 +1,16 @@
 class TourPackagesController < ApplicationController
   before_action :set_tour_package, only: [:show, :edit, :update, :destroy]
+  before_action :find_page, :only => [:search]
 
   # GET /tour_packages
   # GET /tour_packages.json
   def index
     @tour_packages = TourPackage.active.paginate(:page => params[:page])
+  end
+
+  def search
+    @tour_packages = TourPackage.search_tour_pack(params[:q],params[:page])
+    render "index"
   end
 
   # GET /tour_packages/1

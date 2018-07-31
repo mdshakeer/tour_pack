@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :tour_packages
+  resources :tour_packages do
+  	collection do
+  		post "search"
+  	end
+  end
   resources :destinations
   devise_for :users
 

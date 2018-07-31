@@ -31,12 +31,16 @@ body{
 	display: -webkit-flex;
 	display: flex;
 	-webkit-flex-flow: row wrap;
+	align-content: space-between;
 	/*justify-content: center;*/
+	.searchBox{
+		width: 100%;
+	}
 	.tourPack{
 		min-height: 200px;
 		box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
 		padding: 5px;
-		width: 30%;
+		width: 32%;
 		margin-top: 10px;
 		margin-right: 10px;
 		color: #444;

@@ -1,0 +1,17 @@
+<% @tour_packages.each do |tour_package| %>
+  <div class="tourPack">
+    <% if current_user.is_admin? %>
+      <div class="pull-right">
+        <%= link_to "<i class='fa fa-pencil'></i>".html_safe, edit_tour_package_path(tour_package), :remote => true %>
+        <%= link_to "<i class='fa fa-close'></i>".html_safe, tour_package, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+    <div class="title text-center h4"><%= tour_package.name.capitalize %></div>
+    <div><label>Places cover:</label> <%= tour_package.destinations.count %></div>
+    <div><label>Age Range:</label> <%= "#{tour_package.age_from} - #{tour_package.age_upto}" %></div>
+    <div><label>People Limit:</label> <%= tour_package.max_people %></div>
+    <div><label>Cost Per Person:</label> Rs.<%= tour_package.cost_per_person.round %></div>
+    <div><label>Last Submission Date:</label> <%= tour_package.last_submission_date.strftime("%d %b, %Y") %></div>
+    <div class="text-center"><%= link_to 'View Plan', tour_package, :class => "btn btn-success" %></div>
+  </div>
+<% end %>
