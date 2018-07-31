@@ -15,6 +15,9 @@ class TourPackagesController < ApplicationController
   # GET /tour_packages/new
   def new
     @tour_package = TourPackage.new
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /tour_packages/1/edit

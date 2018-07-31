@@ -1,3 +1,6 @@
+body{
+	background-color: #f0f0f0;
+}
 .padding-reset{
 	padding-left: 0 !important;
 	padding-right: 0 !important;
@@ -17,4 +20,27 @@
 }
 .mb-20{
 	margin-bottom: 20px;
+}
+.flexContainer{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-flow: row wrap;
+	.tourPack{
+		min-height: 200px;
+		box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+		padding: 5px;
+		width: 33%;
+		margin-top: 10px;
+		color: #444;
+		border: 1px solid #aaa;
+		.title{
+
+		}
+	}
 }

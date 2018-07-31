@@ -11,47 +11,43 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :tour_package_user_id %>
+    <%= form.text_field :user_id, id: :tour_package_user_id, :class => "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, id: :tour_package_name %>
+    <%= form.text_field :name, id: :tour_package_name, :class => "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :age_from %>
-    <%= form.number_field :age_from, id: :tour_package_age_from %>
+    <%= form.number_field :age_from, id: :tour_package_age_from, :class => "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :age_upto %>
-    <%= form.number_field :age_upto, id: :tour_package_age_upto %>
+    <%= form.number_field :age_upto, id: :tour_package_age_upto, :class => "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :max_people %>
-    <%= form.number_field :max_people, id: :tour_package_max_people %>
+    <%= form.number_field :max_people, id: :tour_package_max_people, :class => "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :cost_per_person %>
-    <%= form.text_field :cost_per_person, id: :tour_package_cost_per_person %>
+    <%= form.text_field :cost_per_person, id: :tour_package_cost_per_person, :class => "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :last_submission_date %>
-    <%= form.date_select :last_submission_date, id: :tour_package_last_submission_date %>
+    <%= form.date_select :last_submission_date, id: :tour_package_last_submission_date, :class => "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :active %>
-    <%= form.check_box :active, id: :tour_package_active %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group text-center">
+    <%= form.submit "SAVE",:class => "btn btn-primary" %>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
   </div>
 <% end %>
