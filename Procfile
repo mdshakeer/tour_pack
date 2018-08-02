@@ -25,14 +25,17 @@ date
 
 TourBooking
 -----------
+tour_pack_id
 name
 contact
 address
 number_of_people
+confirmation
 
 
 Passenger
 ---------
+tour_booking_id
 name
 age
 gender

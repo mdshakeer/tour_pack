@@ -1,7 +1,7 @@
 class TourPackagesController < ApplicationController
   before_action :set_tour_package, only: [:show, :edit, :update, :destroy]
   before_action :find_page, :only => [:search,:filter]
-  before_action :collect_destinations, :only => [:index,:filter]
+  before_action :collect_destinations, :only => [:index,:filter,:search]
 
   # GET /tour_packages
   # GET /tour_packages.json
@@ -44,6 +44,9 @@ class TourPackagesController < ApplicationController
     respond_to do |format|
       if @tour_package.save
         if params[:name] and params[:name].any?
+          @tour_package.destinations.each do |d|
+            d.destroy
+          end
           params[:name].each_with_index do |name,i|
             @tour_package.destinations.create(name:name,point:params[:point][i],date:params[:date][i])
           end
@@ -63,7 +66,9 @@ class TourPackagesController < ApplicationController
     respond_to do |format|
       if @tour_package.update(tour_package_params)
         if params[:name] and params[:name].any?
-          @tour_package.destinations.delete_all
+          @tour_package.destinations.each do |d|
+            d.destroy
+          end
           params[:name].each_with_index do |name,i|
             @tour_package.destinations.create(name:name,point:params[:point][i],date:params[:date][i])
           end

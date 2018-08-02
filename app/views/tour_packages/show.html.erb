@@ -1,44 +1,51 @@
-<p id="notice"><%= notice %></p>
+<div class="container tourShow mt-20">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @tour_package.user %>
-</p>
+  <div class="col-lg-12 col-md-12 col-xs-12 h2 text-center roboto"><%= @tour_package.name %></div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @tour_package.name %>
-</p>
+  <div class="col-lg-12">
+    <div><label>Age Range:</label> <%= "#{@tour_package.age_from} - #{@tour_package.age_upto}" %></div>
+  </div>
 
-<p>
-  <strong>Age from:</strong>
-  <%= @tour_package.age_from %>
-</p>
+  <div class="col-lg-12">
+    <div><label>Max No of people:</label> <%= @tour_package.max_people %></div>
+  </div>
 
-<p>
-  <strong>Age upto:</strong>
-  <%= @tour_package.age_upto %>
-</p>
+  <div class="col-lg-12">
+    <div><label>Cost per person:</label> <%= @tour_package.cost_per_person %></div>
+  </div>
 
-<p>
-  <strong>Max people:</strong>
-  <%= @tour_package.max_people %>
-</p>
+  <div class="col-lg-12">
+    <div><label>Last submission date:</label> <%= @tour_package.last_submission_date %></div>
+  </div>
 
-<p>
-  <strong>Cost per person:</strong>
-  <%= @tour_package.cost_per_person %>
-</p>
+  <div class="tourPoint col-lg-12 mb-10 mt-10 padding-reset">
+    <div class="text-muted h4 col-lg-12">Tour Points</div>
+    <% if s_point = @tour_package.destinations.find_by_point("Start") %>
+      <div class="col-lg-12">
+        <div class="col-lg-12"><label>Start Place:</label> <%= s_point.name_date %></div>
+      </div>
+    <% end %>
+    <% inter_destions = @tour_package.destinations.where(point:"Intermediate").order(date: :asc) %>
+    <% if inter_destions.any? %>
+      <div class="col-lg-12">
+        <div class="col-lg-12"><label>Intermediate Places:</label> <%= display_destinations(inter_destions) %></div>
+      </div>
+    <% end %>
+    <% if e_point = @tour_package.destinations.find_by_point("End") %>
+      <div class="col-lg-12">
+        <div class="col-lg-12"><label>Destination Place:</label> <%= e_point.name_date %></div>
+      </div>
+    <% end %>
+  </div>
 
-<p>
-  <strong>Last submission date:</strong>
-  <%= @tour_package.last_submission_date %>
-</p>
+  <div class="col-lg-12 text-center">
+    <% if current_user.is_admin? %>
+      <%= link_to 'Edit', edit_tour_package_path(@tour_package), :remote => true, :class => "btn btn-primary" %>
+    <% end %>
+    <%= link_to 'Back', tour_packages_path, :class => "btn btn-primary" %>
+  </div>
 
-<p>
-  <strong>Active:</strong>
-  <%= @tour_package.active %>
-</p>
+</div>
 
-<%= link_to 'Edit', edit_tour_package_path(@tour_package) %> |
-<%= link_to 'Back', tour_packages_path %>
+<%= render :partial => "tour_pack_modal" %>

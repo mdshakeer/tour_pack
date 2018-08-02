@@ -70,5 +70,10 @@
       $(".step_2").removeClass("hidden");
     }
     return false;
-  })
+  });
+  $(document).ready(function() {
+    $(document).on("click",".removeParent",function(){
+      $(this).closest(".form-inline").remove();
+    });
+  });
 </script>

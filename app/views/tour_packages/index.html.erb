@@ -1,18 +1,18 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
 
-  <div class="col-lg-12 col-md-12 col-xs-12 h3 text-center roboto">Welcome to TourPack</div>
+  <div class="col-lg-12 col-md-12 col-xs-12 h2 text-center roboto">Welcome to TourPack</div>
 
   <%#= react_component('TourPack', 
                       {:presenter => @tour_packages.to_json}) %>
-  <% if current_user.is_admin? %>
-    <div class="col-lg-12">
-      <% if user_signed_in? %>
-        <%= link_to('Logout', destroy_user_session_path, method: :delete, :class => "btn btn-danger pull-right", :style => "margin-left:10px") %>        
-      <% end %>
+  <div class="col-lg-12">
+    <% if user_signed_in? %>
+      <%= link_to('Logout', destroy_user_session_path, method: :delete, :class => "btn btn-danger pull-right", :style => "margin-left:10px") %>        
+    <% end %>
+    <% if current_user.is_admin? %>
       <%= link_to "<i class='fa fa-plus'></i> Create Tour Package".html_safe, new_tour_package_path, :remote => true, :class => "btn btn-primary pull-right","data-toggle" => "modal", "data-target" => "#tourPack" %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
   <div class="col-lg-12 col-md-12">
     <div class="searchBox form-inline mt-20 mb-10">
       <%= form_with(url: search_tour_packages_path, :method => :get, local: true, html: {:style => "display: inline-block;width:30%;"}) do |form| %>
@@ -47,22 +47,19 @@
     <%= will_paginate @tour_packages %>
   </div>
 
-  <div id="tourPack" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">New Tour Pack</h4>
-        </div>
-        <div class="modal-body">
-        </div>
-      </div>
-
-    </div>
-  </div>
+  <%= render :partial => "tour_pack_modal" %>
 </div>
 <script type="text/javascript">
   $(".chosen-select").chosen({width: "30%"});
+  <% if params[:source] and (params[:source] != "") %>
+    $(".chosen-select[name='source']").val("<%= params[:source] %>").trigger("chosen:updated");
+  <% end %>
+  <% if params[:destination] and (params[:destination] != "") %>
+    $(".chosen-select[name='destination']").val("<%= params[:destination] %>").trigger("chosen:updated");
+  <% end %>
+  <% if params[:date] and (params[:date] != "") %>
+    $(".chosen-select[name='date']").val("<%= params[:date] %>").trigger("chosen:updated");
+  <% end %>
   $('.chosen-select').on('change', function(e) {
     $(this).closest("form").submit();
   });
