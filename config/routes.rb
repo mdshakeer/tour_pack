@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'tour_booking/tour_booker'
+
+  get 'tour_booking/tour_confirm'
+
   resources :tour_packages do
   	collection do
   		get "search"

@@ -1,0 +1,2 @@
+module TourBookingHelper
+end

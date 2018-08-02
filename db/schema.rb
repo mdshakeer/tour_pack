@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180731194125) do
+ActiveRecord::Schema.define(version: 20180802181154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,28 @@ ActiveRecord::Schema.define(version: 20180731194125) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.index ["tour_package_id"], name: "index_destinations_on_tour_package_id"
+  end
+
+  create_table "passengers", force: :cascade do |t|
+    t.bigint "tour_booking_id"
+    t.string "name"
+    t.integer "age"
+    t.string "gender"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tour_booking_id"], name: "index_passengers_on_tour_booking_id"
+  end
+
+  create_table "tour_bookings", force: :cascade do |t|
+    t.bigint "tour_package_id"
+    t.string "name"
+    t.string "contact"
+    t.text "address"
+    t.integer "number_of_people"
+    t.boolean "confirmation", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tour_package_id"], name: "index_tour_bookings_on_tour_package_id"
   end
 
   create_table "tour_packages", force: :cascade do |t|
@@ -59,5 +81,7 @@ ActiveRecord::Schema.define(version: 20180731194125) do
   end
 
   add_foreign_key "destinations", "tour_packages"
+  add_foreign_key "passengers", "tour_bookings"
+  add_foreign_key "tour_bookings", "tour_packages"
   add_foreign_key "tour_packages", "users"
 end
