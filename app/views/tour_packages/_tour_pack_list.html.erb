@@ -6,7 +6,11 @@
         <%= link_to "<i class='fa fa-close'></i>".html_safe, tour_package, method: :delete, data: { confirm: 'Are you sure?' } %>
       </div>
     <% end %>
-    <div class="title text-center h4"><%= tour_package.name.capitalize %></div>
+    <div class="title text-center h4"><%= tour_package.name.capitalize %>
+      <% if tour_package and (b = tour_package.tour_bookings.find_by_user_id(current_user.id)) and b.confirmation %>
+        <span style="color:green"><i class='fa fa-check'></i></span>
+      <% end %>
+    </div>
     <div><label>Places cover:</label> <%= tour_package.destinations.count %></div>
     <div><label>Age Range:</label> <%= "#{tour_package.age_from} - #{tour_package.age_upto}" %></div>
     <div><label>People Limit:</label> <%= tour_package.max_people %></div>

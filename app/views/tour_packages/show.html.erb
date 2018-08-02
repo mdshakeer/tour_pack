@@ -40,6 +40,11 @@
   </div>
 
   <div class="col-lg-12 text-center">
+    <% if @tour_package and (b = @tour_package.tour_bookings.find_by_user_id(current_user.id)) and b.confirmation %>
+      <%= link_to "<i class='fa fa-check'>Booked</i>".html_safe, "#", :class => "btn btn-info" %>
+    <% else %>
+      <%= link_to 'Book the tour', tour_booker_path(@tour_package.id), :class => "btn btn-success" %>
+    <% end %>
     <% if current_user.is_admin? %>
       <%= link_to 'Edit', edit_tour_package_path(@tour_package), :remote => true, :class => "btn btn-primary" %>
     <% end %>

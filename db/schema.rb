@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20180802181154) do
   end
 
   create_table "tour_bookings", force: :cascade do |t|
+    t.bigint "user_id"
     t.bigint "tour_package_id"
     t.string "name"
     t.string "contact"
@@ -45,6 +46,7 @@ ActiveRecord::Schema.define(version: 20180802181154) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tour_package_id"], name: "index_tour_bookings_on_tour_package_id"
+    t.index ["user_id"], name: "index_tour_bookings_on_user_id"
   end
 
   create_table "tour_packages", force: :cascade do |t|
@@ -83,5 +85,6 @@ ActiveRecord::Schema.define(version: 20180802181154) do
   add_foreign_key "destinations", "tour_packages"
   add_foreign_key "passengers", "tour_bookings"
   add_foreign_key "tour_bookings", "tour_packages"
+  add_foreign_key "tour_bookings", "users"
   add_foreign_key "tour_packages", "users"
 end

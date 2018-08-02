@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :tour_packages
+  has_many :tour_bookings
 
   include Authorizable
   

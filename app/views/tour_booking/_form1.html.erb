@@ -1,0 +1,36 @@
+<%= form_with(url: tour_booker_create_url(tour_package.id), method: :post, local: true) do |form| %>
+  <div class="step_1">
+    <% if tour_booking.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(tour_booking.errors.count, "error") %> prohibited this tour_booking from being saved:</h2>
+
+        <ul>
+        <% tour_booking.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <%= form.label :name %>
+      <%= form.text_field "tour_booking[name]", :value => tour_booking.name ,id: :tour_booker_name, :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= form.label :contact %>
+      <%= form.number_field "tour_booking[contact]", :value => tour_booking.contact ,id: :tour_booker_contact, :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= form.label :address %>
+      <%= form.text_area "tour_booking[address]", :value => tour_booking.address ,id: :tour_booker_address, :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= form.label :number_of_people %>
+      <%= form.number_field "tour_booking[number_of_people]", :value => tour_booking.number_of_people ,id: :tour_booker_number_of_people, :class => "form-control" %>
+    </div>
+    <div class="form-group text-center">
+      <%= form.submit "Create Booker",:class => "btn btn-success" %>
+    </div>
+<% end %>
+<div class="col-lg-12 text-center">
+  <%= link_to 'Back', tour_package_path(@tour_package.id), :class => "btn btn-primary" %>
+</div>

@@ -1,2 +1,11 @@
-<h1>TourBooking#tour_booker</h1>
-<p>Find me in app/views/tour_booking/tour_booker.html.erb</p>
+<div class="container tourShow mt-20">
+  <p id="notice"><%= notice %></p>
+
+  <% s_point = @tour_package.destinations.find_by_point("Start") %>
+  <div class="col-lg-12 col-md-12 col-xs-12 h2 text-center roboto"><%= "#{@tour_package.name}(#{s_point.date if s_point})" %></div>
+
+  <div class="col-lg-12">
+  	<%= render :partial => "form1", locals: {:tour_booking => @tour_booking,:tour_package => @tour_package} %>
+  </div>
+
+</div>
